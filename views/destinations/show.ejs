@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Details</title>
+</head>
+<body>
+  <h1>
+    <%= destination.name %>, 
+    <%= destination.location %>
+  </h1>
+  <p><a href="/destinations/<%=destination._id%>/edit">EDIT</a></p>
+
+  <form action="/destinations/<%=destination._id%>?_method=DELETE" method="POST">
+    <button>DELETE</button>
+    
+  </form>
+  <footer><a href="/destinations">ALL</a></footer>
+</body>
+</html>

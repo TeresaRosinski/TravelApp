@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit</title>
+</head>
+<body>
+  <form action="/destinations/<%= destination._id %>?_method=PUT" method="POST">
+    <div>
+      <label for="name" id="name">Name</label>
+      <input type="text" id="name" name="destination[name]" value="<%=destination.name%>">
+    </div>
+    <div>
+      <label for="location" id="location">Location</label>
+      <input type="text" id="location" name="destination[location]" value="<%=destination.location%>">
+    </div>
+    <button>Update Destination</button>
+  </form>
+  <a href="/destinations/<%=destination._id%>">All Destinations</a>
+</body>
+</html>
