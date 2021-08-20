@@ -1,24 +1,94 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>New Destination</title>
-</head>
-<body>
-  <form action="/destinations" method = "POST">
-    <div>
-      <label for="name">Name</label>
-      <input type="text" id="name" name="destination[name]">
-    </div>
+<% layout('layouts/boilerplate') %>
 
-    <div>
-      <label for="location">location</label>
-      <input type="text" id="location" name="destination[location]">
-    </div>
-    <button>Add Destination</button>
-  </form>
-  <a href="/desintations">All Destinations</a>
-</body>
-</html>
+<form
+  action="/destinations"
+  method="POST"
+  class="mt-5 validated-form"
+  style="width: 70%; margin-left: 15%"
+  novalidate
+>
+  <div class="form-floating mb-3">
+    <input
+      class="form-control"
+      type="text"
+      id="name floatingInput"
+      name="destination[name]"
+      required
+    />
+    <div class="valid-feedback">Looks Groovy</div>
+    <div class="invalid-feedback">Bish This is Required</div>
+    <label for="name floatingInput" id="name"> Name</label>
+  </div>
+
+  <div class="form-floating mb-5">
+    <input
+      type="text"
+      class="form-control"
+      id="floatingLocation location"
+      name="destination[location]"
+      required
+    />
+    <div class="valid-feedback">Looks Groovy</div>
+    <div class="invalid-feedback">Bish This is Required</div>
+    <label for="floatingLocation location" id="location">Location </label>
+  </div>
+
+  <div class="form-floating mb-5">
+    <input
+      type="text"
+      class="form-control"
+      id="floatingImage image"
+      name="destination[image[0]]"
+    />
+    <label for="floatingImage image" id="image">Image 1</label>
+  </div>
+
+  <div class="form-floating mb-5">
+    <input
+      type="text"
+      class="form-control"
+      id="floatingImage image"
+      name="destination[image[1]]"
+    />
+    <label for="floatingImage image" id="image">Image 2 </label>
+  </div>
+
+  <div class="form-floating mb-5">
+    <input
+      type="text"
+      class="form-control"
+      id="floatingImage image"
+      name="destination[image[2]]"
+    />
+    <label for="floatingImage image" id="image">Image 3 </label>
+  </div>
+
+  <div class="form-floating mb-5">
+    <input
+      type="text"
+      class="form-control"
+      id="floatingDescription description"
+      name="destination[description]"
+    />
+    <label for="floatingDescription description" id="description">
+      Description
+    </label>
+  </div>
+
+  <div class="form-floating mb-5">
+    <input
+      
+      class="form-control"
+      id="floatingPrice price"
+      name="destination[price]"
+      required
+    />
+    <div class="valid-feedback">Looks Groovy</div>
+    <div class="invalid-feedback">Bish This is Required</div>
+    <label for="floatingPrice price" id="price" required>Price </label>
+  </div>
+
+  <button class="btn btn-light" type="submit">Add Destination</button>
+  <a href="/destinations%>" class="btn btn-light">All Destinations</a>
+</form>
+

@@ -5,7 +5,8 @@ const DestinationSchema = new Schema({
   name: String, 
   description: String, 
   location: String, 
-  price: String, 
+  price: Number,
+  image: [String],  
 });
 
 module.exports = mongoose.model('Destination', DestinationSchema);

@@ -1,22 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Details</title>
-</head>
-<body>
-  <h1>
-    <%= destination.name %>, 
-    <%= destination.location %>
-  </h1>
-  <p><a href="/destinations/<%=destination._id%>/edit">EDIT</a></p>
+<% layout('layouts/boilerplate') %>
+<div style ="text-align: center; text-transform: capitalize;" class="mt-5 mb-2">
+  <p>
+    <%= destination.name %>, <%= destination.location %>
+  </p>
+</div>
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="<%= destination.image[0] %>" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="<%= destination.image[1] %>" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="<%= destination.image[2] %>" class="d-block w-100" alt="...">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+<div class="buttonSection" style="display: flex; flex-direction: column; justify-content: center; align-items: center; margin-top: 3%; margin-bottom: 3%;">
+  <p>Price: <%= destination.price %></p>
+  <p> Description: <%= destination.description %></p>
+  <p><a href="/destinations/<%=destination._id%>/edit" class="btn btn-light">EDIT</a></p>
 
   <form action="/destinations/<%=destination._id%>?_method=DELETE" method="POST">
-    <button>DELETE</button>
-    
+    <button class="btn btn-danger">DELETE</button>
   </form>
-  <footer><a href="/destinations">ALL</a></footer>
-</body>
-</html>
+</div>

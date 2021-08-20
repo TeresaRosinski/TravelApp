@@ -1,21 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Destinations</title>
-</head>
-<body>
-  <h1>All Destinations</h1>
-  <div>
-    <a href="/destinations/new">Add Destination</a>
+<% layout('layouts/boilerplate') %>
+  <h1 style="text-align:center;" class="mt-5">All Destinations</h1>
+  <div style="text-align:center;">
+    <a href="/destinations/new" class="btn btn-light">Add Destination</a>
   </div>
-  <ul>
+  <div class="d-flex flex-row justify-content-center flex-wrap">
     <% for (let destination of destinations) { %>
-      <li><a href="/destinations/<%=destination.id%>"><%= destination.name %></a></li>
-      <p><%= destination.location %></>
+    <div class="card" style="width: 18rem; margin: 1%;">
+      <img src="<%= destination.image[0] %>" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title"><%= destination.name %></h5>
+        <p class="card-text"><%= destination.location %></p>
+        <a href="/destinations/<%=destination.id%>" class="btn btn-light">SEE MORE</a>
+      </div>
+     
+    </div>
     <% } %>
-  </ul>
-</body>
-</html>
+    
+     
+    
+</div>

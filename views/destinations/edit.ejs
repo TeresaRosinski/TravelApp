@@ -1,23 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Edit</title>
-</head>
-<body>
-  <form action="/destinations/<%= destination._id %>?_method=PUT" method="POST">
-    <div>
-      <label for="name" id="name">Name</label>
-      <input type="text" id="name" name="destination[name]" value="<%=destination.name%>">
+<% layout('layouts/boilerplate') %>
+<h1 class="mt-5" style="text-align: center;">Edit: <%= destination.name %> </h1>
+  <form action="/destinations/<%= destination._id %>?_method=PUT" method="POST" class="mt-5 validated-form" style="width: 70%; margin-left: 15%;" novalidate >
+    
+    <div class="form-floating mb-3">
+      <input  class="form-control"  type="text" id="name floatingInput" name="destination[name]" value="<%=destination.name%>" required>
+      <label for="name floatingInput" id="name"> Edit Name</label>
     </div>
-    <div>
-      <label for="location" id="location">Location</label>
-      <input type="text" id="location" name="destination[location]" value="<%=destination.location%>">
+
+    <div class="form-floating mb-5">
+      <input type="text" class="form-control" id="floatingLocation location" name="destination[location]" value="<%=destination.location%>" required>
+      <label for="floatingLocation location" id="location">Edit Location </label>
     </div>
-    <button>Update Destination</button>
+
+    <div class="form-floating mb-5">
+      <input type="text" class="form-control" id="floatingImage image" placeholder="Image URL" name="destination[image[0]]" value="<%=destination.image[0]%>">
+      <label for="floatingImage image" id="image">Edit Image 1</label>
+    </div>
+
+    <div class="form-floating mb-5">
+      <input type="text" class="form-control" id="floatingImage image" placeholder="Image URL" name="destination[image[1]]" value="<%=destination.image[1]%>">
+      <label for="floatingImage image" id="image">Edit Image 2 </label>
+    </div>
+
+    <div class="form-floating mb-5">
+      <input type="text" class="form-control" id="floatingImage image" placeholder="Image URL" name="destination[image[2]]" value="<%=destination.image[2]%>">
+      <label for="floatingImage image" id="image">Edit Image 3 </label>
+    </div>
+
+    <div class="form-floating mb-5">
+      <input type="text" class="form-control" id="floatingDescription description"  name="destination[description]" value="<%=destination.description%>">
+      <label for="floatingDescription description" id="description">Edit Description </label>
+    </div>
+
+    <div class="form-floating mb-5">
+      <input type="number" class="form-control" id="floatingPrice price"  name="destination[price]" value="<%=destination.price%>">
+      <label for="floatingPrice price" id="price" required>Edit Price </label>
+    </div>
+
+    <button class="btn btn-light" type="submit">Update Destination</button>
+    <a href="/destinations%>" class="btn btn-light">All Destinations</a>
   </form>
-  <a href="/destinations/<%=destination._id%>">All Destinations</a>
-</body>
-</html>
+  
