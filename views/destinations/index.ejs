@@ -6,10 +6,10 @@
   <div class="d-flex flex-row justify-content-center flex-wrap">
     <% for (let destination of destinations) { %>
     <div class="card" style="width: 18rem; margin: 1%;">
-      <img src="<%= destination.image[0] %>" class="card-img-top" alt="...">
+      <img src="<%= destination.images%>" class="card-img-top" alt="...">
       <div class="card-body">
-        <h5 class="card-title"><%= destination.name %></h5>
-        <p class="card-text"><%= destination.location %></p>
+        <h5 class="card-title"><%= destination.title %></h5>
+        <p class="card-text"><%= destination.city %></p>
         <a href="/destinations/<%=destination.id%>" class="btn btn-light">SEE MORE</a>
       </div>
      

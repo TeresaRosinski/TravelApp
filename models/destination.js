@@ -4,15 +4,7 @@ const Schema = mongoose.Schema;
 const DestinationSchema = new Schema({
   title: String, 
   city: String,
-  country: String,  
-  details: [String], 
-  images: [String],  
-  experiences: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Experience',
-    }
-  ]
+  images: String,  
 });
 
 module.exports = mongoose.model('Destination', DestinationSchema);
