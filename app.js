@@ -6,7 +6,8 @@ const Destination = require("./models/destination");
 const ejsMate = require('ejs-mate');
 const catchAsync = require('./utils/catchAsync');
 const ExpressError = require('./utils/ExpressError');
-
+const Joi = require('joi');
+const { destinationSchema } = require('./schemas');
 mongoose.connect("mongodb://localhost:27017/travel-app", {
   useNewUrlParser: true,
   useCreateIndex: true,
@@ -27,6 +28,19 @@ app.set("views", path.join(__dirname, "views"));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
+
+//homemade joi middleware
+//joi schema validation - not mongoose schema but joi package server-side validation!!!
+const validateDestination = (req, res, next) => {
+  const { error } = destinationSchema.validate(req.body);
+  if(error){
+    const msg = error.details.map(el => el.message).join(',')
+    throw new ExpressError(msg, 400)
+  } else {
+    next()
+  }
+  console.log(result);
+};
 
 /*
 app.use((req, res, next) => {
@@ -49,8 +63,9 @@ app.get("/destinations/new", (req, res) => {
   res.render("destinations/new");
 });
 
-app.post("/destinations",  catchAsync(async(err, req, res, next  ) => {
-  if(!req.body.destination) throw new ExpressError('Invalid Destination Data', 400);
+app.post("/destinations", validateDestination, catchAsync(async( req, res, next  ) => {
+  //if(!req.body.destination) throw new ExpressError('Invalid Destination Data', 400);
+  
   const destination = new Destination(req.body.destination);
   await destination.save();
   res.redirect(`/destinations/${destination._id}`);
@@ -66,7 +81,7 @@ app.get("/destinations/:id/edit", catchAsync(async (req, res) => {
   res.render("destinations/edit", { destination });
 }));
 
-app.put("/destinations/:id", catchAsync(async (req, res) => {
+app.put("/destinations/:id", validateDestination, catchAsync(async (req, res) => {
   const { id } = req.params;
   const destination = await Destination.findByIdAndUpdate(id, {
     ...req.body.destination
