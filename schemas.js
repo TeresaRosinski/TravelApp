@@ -1,16 +1,16 @@
-const { string, array } = require('joi');
-const Joi = require('joi');
+const { number } = require("joi");
+const Joi = require("joi");
 //pattern for javascript object
 
 module.exports.destinationSchema = Joi.object({
-    destination: Joi.object({
-      title: Joi.string(),
-      city: Joi.string(),
-      images: Joi.string(),
-    })
-  });
+  destination: Joi.object({
+    title: Joi.string(),
+    city: Joi.string(),
+    images: Joi.string(),
+  }).required(),
+});
 
-  /*
+/*
   module.exports.experienceSchema = Joi.object({
     experience: Joi.object({
       name: Joi.string().required(),

@@ -1,0 +1,48 @@
+<% layout('layouts/boilerplate') %>
+
+<form
+  action="/experiences"
+  method="POST"
+  class="mt-5 validated-form"
+  style="width: 70%; margin-left: 15%"
+  novalidate
+>
+  <div class="form-floating mb-3">
+    <input
+      class="form-control"
+      type="text"
+      id="name floatingInput"
+      name="experience[name]"
+      required
+    />
+    <div class="valid-feedback">Looks Groovy</div>
+    <div class="invalid-feedback">Bish This is Required</div>
+    <label for="title floatingInput" id="title">Name</label>
+  </div>
+
+  <div class="form-floating mb-5">
+    <input
+      type="text"
+      class="form-control"
+      id="city"
+      name="experience[description]"
+      required
+    />
+    <div class="valid-feedback">Looks Groovy</div>
+    <div class="invalid-feedback">Bish This is Required</div>
+    <label for="description" id="description">Description </label>
+  </div>
+
+  <div class="form-floating mb-5">
+    <input
+      type="text"
+      class="form-control"
+      id="images"
+      name="experience[image]"
+    />
+    <label for="image" id="image">Image 1</label>
+  </div>
+  <button class="btn btn-light" type="submit">Add Experience</button>
+  <a href="/experiences%>" class="btn btn-light">All Experiences</a>
+</form>
+

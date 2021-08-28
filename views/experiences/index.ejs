@@ -1,0 +1,22 @@
+<% layout('layouts/boilerplate') %>
+  <h1 style="text-align:center;" class="mt-5">All Experiences</h1>
+  <div style="text-align:center;">
+    <a href="/experiences/new" class="btn btn-light">Add Experience</a>
+  </div>
+  <div class="d-flex flex-row justify-content-center flex-wrap">
+    <% for (let experience of experiences) { %>
+    <div class="card" style="width: 18rem; margin: 1%;">
+      <img src="<%= experience.image %>" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title"><%= experience.title %></h5>
+        <p class="card-text"><%= experience.city %></p>
+       
+        <a href="/experiences/<%=experience.id%>" class="btn btn-light">SEE DETAILS</a>
+      </div>
+     
+    </div>
+    <% } %>
+    
+     
+    
+</div>
