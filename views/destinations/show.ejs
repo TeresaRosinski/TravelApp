@@ -1,50 +1,21 @@
 <% layout('layouts/boilerplate') %>
-
-<div class="row imagesAndText" style="min-height: 70vh;" >
-  <h1 style="text-transform: uppercase; letter-spacing: 3px; text-align: center; padding-bottom: 3%;"> <%= destination.title %> </> </h1>
-  <div class="col">
-    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-      </div>
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img src="<%= destination.images %>" class="d-block w-100" alt="...">
-        </div>
-        <div class="carousel-item">
-          <img src="<%= destination.images %>" class="d-block w-100" alt="...">
-        </div>
-        <div class="carousel-item">
-          <img src="<%= destination.images %>" class="d-block w-100" alt="...">
-        </div>
-      </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
-    </div>
+<div class="row showIntro">
+<h1 style="text-transform: uppercase; letter-spacing: 3px; text-align: center; padding-bottom: 3%;"> <%= destination.title %> </> </h1>
+<div class="imagesAndText" style="min-height: 70vh;" >
+  <div class=""  >
+       <img src="<%= destination.images %>" alt="" style="height: 50vh;" class="img-fluid" >
   </div>
-  <div class="col d-flex flex-column align-items-start">
-    <h2 style="text-transform: capitalize; letter-spacing: 1px;"> <%= destination.city %> </> </h2>
-    <h2 style="text-transform: capitalize; letter-spacing: 1px;">Experiences:</h2>
+  <div class="destContent">
+    <h2 style="text-transform: capitalize; letter-spacing: 1px;"> <%= destination.city %> Pre-Made Experiences</> </h2>
 <ul style="list-style: none;">
 <% for (let experience of destination.experiences) { %>
  <h4> <a href='/experiences/<%=experience.id%>' style="text-decoration: none;"> <%= experience.name %></a> </h4> 
 <% } %>
 </ul>
-    <p><a href="/destinations/<%=destination._id%>/edit" class="btn btn-light">EDIT</a></p>
-    <form action="/destinations/<%=destination._id%>?_method=DELETE" method="POST">
-      <button class="btn btn-danger">DELETE</button>
-    </form>
+    
   </div>
 </div>
-
+</div>
 <div class="row notes d-flex flex-column align-items-center">
   <h1 style="text-transform: uppercase; letter-spacing: 3px;">Notes</h1>
   <div class="addNotes">
@@ -53,7 +24,6 @@
         <input type="text" class="form-control" placeholder="Note" id="notes" name="destination[notes]">
         <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Add Note</button>
       </div>
-
     </form>
     <div class="showNotes">
       <% for (note of destination.notes ) { %>
@@ -69,7 +39,7 @@
             </div>
             <div class="col-md-3 d-flex justify-content-end align-items-center" style="padding-right:1%;">
               <form action="/destinations/<%= destination._id %>/note/<%= note._id %>?_method=DELETE" method="POST">
-                <button class="btn btn-danger">DELETE</button>
+                <button class="btn btn-link btn-sm">DELETE</button>
               </form>
             </div>
           </div>
@@ -80,4 +50,10 @@
      <% } %>
     </div>
   </div>
+</div>
+<div class="buttonHolder">
+  <p><a href="/destinations/<%=destination._id%>/edit" class="btn btn-light btn-md">EDIT DESTINATION</a></p>
+  <form action="/destinations/<%=destination._id%>?_method=DELETE" method="POST">
+    <button class="btn btn-danger btn-md">DELETE DESTINTION</button>
+  </form>
 </div>

@@ -1,7 +1,23 @@
-.imagesAndText {
+.showIntro{
   background-color: rgba(229, 229, 220, 0.6);
   padding: 5%;
   color: #26495c;
+}
+.destContent{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-left: 5%;
+  text-align: center;
+}
+.imagesAndText {
+  background-color: rgba(229, 229, 220, 0.3);
+  padding: 5%;
+  color: #26495c;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
 }
 .notes{
   min-height: 30vh;
@@ -19,4 +35,13 @@
   width: 60%;
   border: #c66b3d 1px solid;
   margin: 3%;
+}
+.buttonHolder{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  min-height: 20vh;
+  background-color: rgba(229, 229, 220, 0.2);
+  margin: 0;
 }
