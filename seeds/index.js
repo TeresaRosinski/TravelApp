@@ -21,7 +21,8 @@ const seedDbDest = async () => {
     title: "Chicago",
     city: "Chicago",
     images: "https://source.unsplash.com/iEJVyyevw-U",
-    experiences:['612941c0188b942bb0382b44'],
+    experiences:[{name: '????', id: '612941c0188b942bb0382b44'}],
+    notes: [ { body : 'chicago is wa'}]
   });
   console.log(destination);
   await destination.save();

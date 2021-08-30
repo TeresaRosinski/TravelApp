@@ -8,9 +8,14 @@ const DestinationSchema = new Schema({
   experiences: [
     {
       name: String,
-      id: String
+      id: String,
     }
-  ] 
+  ] , 
+  notes: [
+    {
+      body: String, 
+    }
+  ]
 });
 
 module.exports = mongoose.model('Destination', DestinationSchema);

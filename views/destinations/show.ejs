@@ -1,7 +1,8 @@
-
 <% layout('layouts/boilerplate') %>
-<div class="row mt-5" style="height: 90vh;" >
-  <div class="col imagesAndText">
+
+<div class="row imagesAndText" style="min-height: 70vh;" >
+  <h1 style="text-transform: uppercase; letter-spacing: 3px; text-align: center; padding-bottom: 3%;"> <%= destination.title %> </> </h1>
+  <div class="col">
     <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -29,9 +30,8 @@
       </button>
     </div>
   </div>
-  <div class="col d-flex flex-column align-items-start" ">
-    <h1 style="text-transform: uppercase; letter-spacing: 3px;"> Title: <%= destination.title %> </> </h1>
-    <h2 style="text-transform: capitalize; letter-spacing: 1px;"> Location:  <%= destination.city %> </> </h2>
+  <div class="col d-flex flex-column align-items-start">
+    <h2 style="text-transform: capitalize; letter-spacing: 1px;"> <%= destination.city %> </> </h2>
     <h2 style="text-transform: capitalize; letter-spacing: 1px;">Experiences:</h2>
 <ul style="list-style: none;">
 <% for (let experience of destination.experiences) { %>
@@ -43,8 +43,41 @@
       <button class="btn btn-danger">DELETE</button>
     </form>
   </div>
-
-<div class="experiences d-flex flex-column align-items-center mt-3">
-<h1 style="text-transform: uppercase; letter-spacing: 3px;">Notes</h1>
 </div>
+
+<div class="row notes d-flex flex-column align-items-center">
+  <h1 style="text-transform: uppercase; letter-spacing: 3px;">Notes</h1>
+  <div class="addNotes">
+    <form action="/destinations/<%= destination._id %>/notes" method="POST">
+      <div class="input-group mb-3 mt-3">
+        <input type="text" class="form-control" placeholder="Note" id="notes" name="destination[notes]">
+        <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Add Note</button>
+      </div>
+
+    </form>
+    <div class="showNotes">
+      <% for (note of destination.notes ) { %>
+        <div class="card mb-3" >
+          <div class="row g-0">
+            <div class="col-md-9">
+              <div class="card-body" style="margin: 0; padding: 0; text-align: left; padding: 2%">
+                <p style="margin: 0; padding: 0; font-size: 150%;"><%= note.body %></p>
+                <p style="margin: 0; padding: 0;"><small class="text-muted">DateTime posted - eventual</small></p>
+                <p style="margin: 0; padding: 0;" ><small class="text-muted">User who posted note - eventual</small></p>
+              </div>
+
+            </div>
+            <div class="col-md-3 d-flex justify-content-end align-items-center" style="padding-right:1%;">
+              <form action="/destinations/<%= destination._id %>/note/<%= note._id %>?_method=DELETE" method="POST">
+                <button class="btn btn-danger">DELETE</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+
+
+     <% } %>
+    </div>
+  </div>
 </div>

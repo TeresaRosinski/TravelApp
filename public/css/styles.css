@@ -1,3 +1,22 @@
 .imagesAndText {
-  background-color: aquamarine;
+  background-color: rgba(229, 229, 220, 0.6);
+  padding: 5%;
+  color: #26495c;
+}
+.notes{
+  min-height: 30vh;
+  background-color:rgba(229, 229, 220, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  padding-top: 3%;
+  color: #c66b3d;
+}
+.addNotes{
+  min-height: 40vh;
+  width: 60%;
+  border: #c66b3d 1px solid;
+  margin: 3%;
 }

@@ -27,7 +27,8 @@ const app = express();
 app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
-
+//for css
+app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 
@@ -94,7 +95,6 @@ app.post(
   })
 );
 
-
 app.post(
   "/experiences",
   catchAsync(async (req, res, next) => {
@@ -108,7 +108,6 @@ app.post(
 app.get(
   "/destinations/:id",
   catchAsync(async (req, res) => {
-    console.log('req', res.body);
     const destination = await Destination.findById(req.params.id);
     const experience = await Destination.findById(req.body.experience_id);
     res.render("destinations/show", { destination, experience });
@@ -120,7 +119,7 @@ app.get(
   "/experiences/:id",
   catchAsync(async (req, res) => {
     const experience = await Experience.findById(req.params.id);
-    const destinations = await Destination.find({})
+    const destinations = await Destination.find({});
     res.render("experiences/show", { experience, destinations });
   })
 );
@@ -144,14 +143,33 @@ app.get(
 app.put(
   "/destinations/:id",
   catchAsync(async (req, res) => {
-    console.log("req edie", req);
-    console.log("params edit", req.params);
+    console.log("req show page dest", req);
+    console.log("params edit dest show page", req.params);
     const { id } = req.params;
     console.log("req.body.destination", req.body.destination);
     const destination = await Destination.findByIdAndUpdate(id, {
       ...req.body.destination,
     });
     console.log(destination);
+    res.redirect(`/destinations/${destination._id}`);
+  })
+);
+
+//PUT Route for Notes section of destination/:id page
+app.post(
+  "/destinations/:id/notes",
+  catchAsync(async (req, res) => {
+    console.log("req body.dstination", req.body.destination.notes);
+    const { id } = req.params;
+    ///why undefined note????
+    const { note } = req.body.destination.notes;
+    console.log("note", note);
+    const destination = await Destination.findById(id);
+    //successsfully pushes body into array
+    destination.notes.push({ body: req.body.destination.notes });
+    console.log(destination.notes);
+    await destination.save();
+
     res.redirect(`/destinations/${destination._id}`);
   })
 );
@@ -171,6 +189,24 @@ app.put(
   })
 );
 
+//delete indv note
+/// form route/action: "/destinations/<%= destination._id %>/note/<%= note._id %>?_method=DELETE"
+app.delete(
+  "/destinations/:id/note/:noteID",
+  catchAsync(async (req, res) => {
+    const { id, noteID } = req.params;
+    console.log("params", req.params);
+    const destination = await Destination.findById(id);
+    console.log("destination", destination);
+    const newArrayNotes = destination.notes.filter(note => note._id != noteID);
+    console.log(newArrayNotes);
+    destination.notes = newArrayNotes;
+    destination.save();
+    res.redirect(`/destinations/${destination._id}`);
+  })
+);
+
+//form route/action: "/destinations/<%=destination._id%>?_method=DELETE" method="POST"
 app.delete(
   "/destinations/:id",
   catchAsync(async (req, res) => {
@@ -179,7 +215,6 @@ app.delete(
     res.redirect("/destinations");
   })
 );
-
 
 app.delete(
   "/experiences/:id",
@@ -190,20 +225,23 @@ app.delete(
   })
 );
 
-app.post('/destinations/:id/experiences/:expId', catchAsync(async (req, res) => {
-  console.log( "post both req:", req.params);
-  const { id, expId} = req.params
-  
-  const destination = await Destination.findById(id);
-  console.log('destination', destination)
-  const experience = await Experience.findById(expId)
-  
-  console.log('experience', experience.name)
-  destination.experiences.push({name:experience.name, id:expId});
-  await destination.save();
-  console.log('destination2', destination);
-  res.redirect(`/destinations/${destination._id}`);
-}))
+app.post(
+  "/destinations/:id/experiences/:expId",
+  catchAsync(async (req, res) => {
+    console.log("post both req:", req.params);
+    const { id, expId } = req.params;
+
+    const destination = await Destination.findById(id);
+    console.log("destination", destination);
+    const experience = await Experience.findById(expId);
+
+    console.log("experience", experience.name);
+    destination.experiences.push({ name: experience.name, id: expId });
+    await destination.save();
+    console.log("destination2", destination);
+    res.redirect(`/destinations/${destination._id}`);
+  })
+);
 
 //for urls requested that don't exist - ORDER IS IMPORTANT
 app.all("*", (req, res, next) => {
