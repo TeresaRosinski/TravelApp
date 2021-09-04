@@ -1,20 +1,52 @@
 <% layout('layouts/boilerplate') %>
-<div class="row showIntro">
-<h1 style="text-transform: uppercase; letter-spacing: 3px; text-align: center; padding-bottom: 3%;"> <%= destination.title %> </> </h1>
-<div class="imagesAndText" style="min-height: 70vh;" >
-  <div class=""  >
-       <img src="<%= destination.images %>" alt="" style="height: 50vh;" class="img-fluid" >
-  </div>
-  <div class="destContent">
-    <h2 style="text-transform: capitalize; letter-spacing: 1px;"> <%= destination.city %> Pre-Made Experiences</> </h2>
-<ul style="list-style: none;">
-<% for (let experience of destination.experiences) { %>
- <h4> <a href='/experiences/<%=experience.id%>' style="text-decoration: none;"> <%= experience.name %></a> </h4> 
-<% } %>
-</ul>
-    
+<h1> <%= destination.title %> </> </h1>
+<div class="imageHolder">
+  <img src="<%= destination.images %>" alt=""  class="destImg" >
+</div>
+<div class="container-fluid">
+  <div class="row align-items-start">
+
+    <div class="col-5 colContentDetails">
+      <p class="colTitle">Key Details</p>
+      <p>Weather</p>
+      <form action="/destinations/<%= destination._id %>/timing" method="POST">
+        <div class="mb-3 mt-3">
+          <div class="inputButtonHolder">
+          <input type="text" class="form-control" placeholder="What is the ideal time of year to go?" id="timing" name="destination[timing]">
+          <button class="btn btn-outline-secondary" type="submit" id="button-addon2">+</button>
+        </div>
+        </div>
+        <div class="showTiming">
+       <% for (let timing of destination.timing) { %>
+        <p> <%= timing.body %>
+          
+            <form action="/destinations/<%= destination._id %>/timing/<%= timing._id%>?_method=DELETE" method="POST">
+              <button class="btn btn-link btn-sm">DELETE</button>
+            </form>
+        
+        </p> 
+      <% } %>
+          </div>
+        </div>
+      </form>
+    </div>
+
+
+    <div class="col-5 colContent">
+      <p class="colTitle "> <%= destination.title %>  Experiences</p>
+      <div>
+        <ul style="list-style: none;">
+          <% for (let experience of destination.experiences) { %>
+            <h4> <a href='/experiences/<%=experience.id%>' style="text-decoration: none;"> <%= experience.name %></a> </h4> 
+          <% } %>
+        </ul>
+      </div>
+    </div>
   </div>
 </div>
+
+
+  
 </div>
 <div class="row notes d-flex flex-column align-items-center">
   <h1 style="text-transform: uppercase; letter-spacing: 3px;">Notes</h1>

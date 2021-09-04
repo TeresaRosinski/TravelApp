@@ -162,7 +162,7 @@ app.post(
     console.log("req body.dstination", req.body.destination.notes);
     const { id } = req.params;
     ///why undefined note????
-    const { note } = req.body.destination.notes;
+    const note = req.body.destination.notes;
     console.log("note", note);
     const destination = await Destination.findById(id);
     //successsfully pushes body into array
@@ -170,6 +170,37 @@ app.post(
     console.log(destination.notes);
     await destination.save();
 
+    res.redirect(`/destinations/${destination._id}`);
+  })
+);
+
+//destination Timing
+app.post(
+  "/destinations/:id/timing",
+  catchAsync(async (req, res) => {
+    const { id } = req.params;
+    const timing = req.body.destination.timing;
+    console.log("timing", timing);
+
+    const destination = await Destination.findById(id);
+
+    destination.timing.push({ body : timing });
+    await destination.save();
+    res.redirect(`/destinations/${destination._id}`);
+  })
+);
+//Delete Timing
+app.delete(
+  "/destinations/:id/timing/:timingID",
+  catchAsync(async (req, res) => {
+    const { id, timingID } = req.params;
+    const destination = await Destination.findById(id);
+    const newTimingArray = destination.timing.filter(
+      (item) => item != timingID
+    );
+    destination.timing = newTimingArray;
+    destination.save();
+    console.log("new timing array", newTimingArray);
     res.redirect(`/destinations/${destination._id}`);
   })
 );
@@ -198,7 +229,9 @@ app.delete(
     console.log("params", req.params);
     const destination = await Destination.findById(id);
     console.log("destination", destination);
-    const newArrayNotes = destination.notes.filter(note => note._id != noteID);
+    const newArrayNotes = destination.notes.filter(
+      (note) => note._id != noteID
+    );
     console.log(newArrayNotes);
     destination.notes = newArrayNotes;
     destination.save();

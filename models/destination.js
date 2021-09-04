@@ -3,11 +3,22 @@ const Schema = mongoose.Schema;
 
 const DestinationSchema = new Schema({
   title: String, 
-  city: String,
+  location: String,
   images: String, 
+  timing: [ 
+    {
+      body: String 
+    } 
+  ], 
+  budget: String, 
+  lodging: [ String ], 
+  transportation: String, 
+  safety: String, 
   experiences: [
     {
       name: String,
+      location: String, 
+      price: Number, 
       id: String,
     }
   ] , 
