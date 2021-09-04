@@ -1,32 +1,32 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const DestinationSchema = new Schema({
-  title: String, 
+  title: String,
   location: String,
-  images: String, 
-  timing: [ 
+  images: String,
+  timingDetails: [
     {
-      body: String 
-    } 
-  ], 
-  budget: String, 
-  lodging: [ String ], 
-  transportation: String, 
-  safety: String, 
+      body: String,
+    },
+  ],
+  budget: String,
+  lodging: [String],
+  transportation: String,
+  safety: String,
   experiences: [
     {
       name: String,
-      location: String, 
-      price: Number, 
+      location: String,
+      price: Number,
       id: String,
-    }
-  ] , 
+    },
+  ],
   notes: [
     {
-      body: String, 
-    }
-  ]
+      body: String,
+    },
+  ],
 });
 
-module.exports = mongoose.model('Destination', DestinationSchema);
+module.exports = mongoose.model("Destination", DestinationSchema);

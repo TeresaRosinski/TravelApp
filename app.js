@@ -179,12 +179,11 @@ app.post(
   "/destinations/:id/timing",
   catchAsync(async (req, res) => {
     const { id } = req.params;
-    const timing = req.body.destination.timing;
-    console.log("timing", timing);
+    const timingDetail = req.body.destination.timingDetails;
 
     const destination = await Destination.findById(id);
 
-    destination.timing.push({ body : timing });
+    destination.timingDetails.push({ body: timingDetail });
     await destination.save();
     res.redirect(`/destinations/${destination._id}`);
   })
@@ -195,12 +194,13 @@ app.delete(
   catchAsync(async (req, res) => {
     const { id, timingID } = req.params;
     const destination = await Destination.findById(id);
-    const newTimingArray = destination.timing.filter(
-      (item) => item != timingID
+    const newTimingArray = destination.timingDetails.filter(
+      (item) => item._id != timingID
     );
-    destination.timing = newTimingArray;
+    console.log(newTimingArray);
+    destination.timingDetails = newTimingArray;
     destination.save();
-    console.log("new timing array", newTimingArray);
+
     res.redirect(`/destinations/${destination._id}`);
   })
 );
@@ -226,9 +226,7 @@ app.delete(
   "/destinations/:id/note/:noteID",
   catchAsync(async (req, res) => {
     const { id, noteID } = req.params;
-    console.log("params", req.params);
     const destination = await Destination.findById(id);
-    console.log("destination", destination);
     const newArrayNotes = destination.notes.filter(
       (note) => note._id != noteID
     );

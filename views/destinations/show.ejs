@@ -12,18 +12,17 @@
       <form action="/destinations/<%= destination._id %>/timing" method="POST">
         <div class="mb-3 mt-3">
           <div class="inputButtonHolder">
-          <input type="text" class="form-control" placeholder="What is the ideal time of year to go?" id="timing" name="destination[timing]">
+          <input type="text" class="form-control" placeholder="What is the ideal time of year to go?" id="timing" name="destination[timingDetails]">
           <button class="btn btn-outline-secondary" type="submit" id="button-addon2">+</button>
         </div>
         </div>
         <div class="showTiming">
-       <% for (let timing of destination.timing) { %>
+       <% for (let timing of destination.timingDetails) { %>
         <p> <%= timing.body %>
           
             <form action="/destinations/<%= destination._id %>/timing/<%= timing._id%>?_method=DELETE" method="POST">
               <button class="btn btn-link btn-sm">DELETE</button>
             </form>
-        
         </p> 
       <% } %>
           </div>
@@ -67,7 +66,6 @@
                 <p style="margin: 0; padding: 0;"><small class="text-muted">DateTime posted - eventual</small></p>
                 <p style="margin: 0; padding: 0;" ><small class="text-muted">User who posted note - eventual</small></p>
               </div>
-
             </div>
             <div class="col-md-3 d-flex justify-content-end align-items-center" style="padding-right:1%;">
               <form action="/destinations/<%= destination._id %>/note/<%= note._id %>?_method=DELETE" method="POST">
@@ -76,13 +74,13 @@
             </div>
           </div>
         </div>
-
-
-
      <% } %>
     </div>
   </div>
 </div>
+
+
+
 <div class="buttonHolder">
   <p><a href="/destinations/<%=destination._id%>/edit" class="btn btn-light btn-md">EDIT DESTINATION</a></p>
   <form action="/destinations/<%=destination._id%>?_method=DELETE" method="POST">
